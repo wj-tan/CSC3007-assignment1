@@ -1,7 +1,8 @@
 // Api link for data gov environment data
 const apiUrl = 'https://api.data.gov.sg/v1/environment/psi'
 var environmentData = null;
-var table = document.getElementById("table")
+var table = document.getElementById("table");
+// var timeStamp = document.getElementById("dateTime");
 
 fetch(apiUrl)
     .then(response => response.json())
@@ -10,9 +11,6 @@ fetch(apiUrl)
         // Store Json data in environmentData variable
         environmentData = data.items[0].readings
         console.log(environmentData)
-
-        console.log(environmentData["no2_one_hour_max"])
-
 
         // const col_arr =[]
         // const col_national = []
@@ -48,18 +46,18 @@ fetch(apiUrl)
             colNorth.innerHTML = environmentData[key].north
             colSouth.innerHTML = environmentData[key].south
 
-
-            // const a = {dog : 1}
-
-            // key : dog
-            // value : 1
-
-            // a["dog"
         })
 
         Object.values(environmentData).map(value=>{
             console.log(value);
         })
+
+        var timeStamp = new Date(data.items[0].update_timestamp).toLocaleString();
+        document.getElementById("dateTime").innerHTML += timeStamp;
+        console.log(data.items[0].update_timestamp)
+
+        
+
         // for (var key in environmentData) {
         //     console.log("key", key);
         //     //json_value = {west:1,east:2}
